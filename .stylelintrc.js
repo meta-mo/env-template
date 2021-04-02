@@ -10,7 +10,7 @@ module.exports = {
     'at-rule-no-unknown': [
       true,
       {
-        ignoreAtRules: ['tailwind', 'layer', 'variants']
+        ignoreAtRules: ['tailwind', 'apply', 'variants', 'responsive', 'screen']
       }
     ],
     'prettier/prettier': true,

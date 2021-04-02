@@ -18,6 +18,7 @@
     "noEmitOnError": true,
     "resolveJsonModule": true,
     "lib": ["esnext", "dom", "dom.iterable"],
+    "baseUrl": ".",
     "skipLibCheck": true,
     "noEmit": true,
     "isolatedModules": true,
