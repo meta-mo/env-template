@@ -7,8 +7,9 @@
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "lint": "run-p -l -c --aggregate-output lint:*",
-    "lint:eslint": "eslint .",
+    "lint:eslint": "eslint --ext .ts,.vue .",
     "lint:prettier": "prettier --check .",
+    "lint:stylelint": "stylelint ./**/*.{scss,vue}",
     "fix": "run-s fix:prettier fix:eslint",
     "fix:eslint": "npm run lint:eslint -- --fix",
     "fix:prettier": "npm run lint:prettier -- --write"
@@ -28,6 +29,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-unicorn": "^29.0.0",
     "eslint-plugin-vue": "^7.8.0",
+    "husky": "4",
+    "lint-staged": "^10.5.4",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "sass": "^1.32.8",
@@ -44,10 +47,10 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run lint && lint-staged"
     }
   },
   "lint-staged": {
-    "src/**/*.{ts,vue}": "run-s fix:prettier fix:eslint"
+    "*.{ts,vue}": "npm run fix"
   }
 }
