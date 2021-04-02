@@ -14,9 +14,9 @@
 - Tailwind
 - ESLint
 - Prettier
-- StyleLint
-- husky
-- lint-staged
+- Stylelint
+- ~~husky~~
+- ~~lint-staged~~
 
 ## VSCode の設定
 
@@ -130,7 +130,7 @@ module.exports = {
 }
 ```
 
-### StyleLint
+### Stylelint
 
 SCSS で使う場合を想定
 
@@ -138,7 +138,7 @@ SCSS で使う場合を想定
 module.exports = {
   extends: [
     'stylelint-config-standard', // いくつかの基本ルール
-    'stylelint-prettier/recommended', // PrettierとStyleLint整合性ををいい感じに保ってくれる
+    'stylelint-prettier/recommended', // PrettierとStylelint整合性ををいい感じに保ってくれる
     'stylelint-config-recess-order' // CSSのプロパティをソートしてくれる
   ],
   syntax: 'scss', // scssで使う
@@ -148,7 +148,12 @@ module.exports = {
     'stylelint-prettier' // prettierの為の設定
   ],
   rules: {
-    'at-rule-no-unknown': null, // Tailwindなどと干渉するので消す
+    'at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: ['tailwind', 'apply', 'variants', 'responsive', 'screen']
+      }
+    ], // 存在しないルールを消す、Tailwind関係は除外
     'no-descending-specificity': null, // 「詳細度が高いセレクタを後に書かなければならない」が苦労するので消す
     'prettier/prettier': true, // prettierを使う
     'order/order': [['dollar-variables', 'declarations', 'rules']], // CSSの並び順のルール、
@@ -159,4 +164,20 @@ module.exports = {
 
 ### huskey & lint-staged
 
-Git のステージに上がっているファイルを対象に eslint を実行する
+huskey がバージョンアップでかなり仕様が変わったのと huskey -> lint-staged 経由で ESLint を実行すると挙動がおかしいので保留
+
+### tailwind
+
+tailwind が好きなので使う
+[Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) を使い、以下の設定を VSCode の`settings.json`に追加すると予測変換がでるので楽
+
+```json
+  "tailwindCSS.includeLanguages": {
+    "typescript": "tsx",
+    "Vue": "html"
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "editor.quickSuggestions": {
+    "strings": true // 文字列の場合入力補完をすぐに出す
+  },
+```
